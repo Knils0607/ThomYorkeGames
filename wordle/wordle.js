@@ -14,7 +14,7 @@ window.onload = function () {
 };
 
 function initialize() {
-    word = pickRandomWord();
+    // word = pickRandomWord();
 
     // Create the grid for guesses
     for (let r = 0; r < height; r++) {
@@ -29,24 +29,25 @@ function initialize() {
 
     document.addEventListener("keyup", (e) => {
         if (gameOver) return;
+        const key = e.key.toUpperCase();
 
-        if ("KeyA" <= e.code && e.code <= "KeyZ") {
+        if (key.length === 1 && key >= "A" && key <= "Z") {
             if (col < width) {
                 let currentTile = document.getElementById(row.toString() + "-" + col.toString());
                 if (currentTile.innerText == "") {
-                    currentTile.innerText = e.code[3];
+                    currentTile.innerText = key;
                     col += 1;
                 }
             }
         }
-        else if (e.code == "Backspace") {
+        else if (e.key == "Backspace") {
             if (0 < col && col <= width) {
                 col -= 1;
                 let currentTile = document.getElementById(row.toString() + "-" + col.toString());
                 currentTile.innerText = "";
             }
         }
-        else if (e.code == "Enter") {
+        else if (e.key == "Enter") {
             const guess = getCurrentGuess();
             if (guess.length < width) {
                 return;
