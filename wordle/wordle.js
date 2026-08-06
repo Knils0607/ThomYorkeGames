@@ -168,6 +168,7 @@ function update() {
     }
 
     // second iteration, check for correct letters in wrong position and absent ones
+    // needed so correct letters take precedence over present letters
     for (let c = 0; c < width; c++) {
         let currentTile = document.getElementById(row.toString() + "-" + c.toString());
         let letter = currentTile.innerText;
@@ -184,7 +185,9 @@ function update() {
             else {
                 currentTile.classList.add("absent");
                 let keyTile = document.getElementById(letter);
-                keyTile.classList.add("absent");
+                if (!keyTile.classList.contains("correct") && !keyTile.classList.contains("present")) {
+                    keyTile.classList.add("absent");
+                }
             }
         }
     }
