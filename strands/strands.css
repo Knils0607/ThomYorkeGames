@@ -38,6 +38,12 @@ hr {
     white-space: pre-wrap;
 }
 
+/* Reserve space for the input area so the layout doesn't shift */
+#input {
+    min-height: 48px;
+    padding: 6px;
+}
+
 #board {
     display: grid;
     grid-template-columns: repeat(6, 60px);

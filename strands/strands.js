@@ -8,6 +8,7 @@ const invalid_strands = {
 
 const example_theme = "Fresh from the market";
 
+// first word is the spangram
 const example_strands = {
     "SUMMERHARVEST": [[0,4],[1,4],[1,3],[1,2],[2,2],[2,3],[2,4],[3,4],[4,4],[4,5],[5,5],[5,6],[5,7]],
     "TOMATO": [[0,3],[0,2],[0,1],[0,0],[1,0],[1,1]],
@@ -21,6 +22,8 @@ const example_strands = {
 let strands;
 let num_words = 0;
 let words_found = 0;
+let selected_positions = [];
+var gameOver = false; // Game over flag
 
 window.onload = function () {
     initialize();
@@ -48,6 +51,7 @@ function initialize() {
         return;
     }
 
+    //  build the board
     board.innerHTML = "";
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
@@ -59,9 +63,68 @@ function initialize() {
         }
     }
 
+    // fill the board/tiles with the letters in strands
     fillAllStrandTiles(strands);
 
     document.addEventListener("click", processInput);
+}
+
+function processInput(event) {
+    if (gameOver) return;
+    if (!event) return;
+
+    // The clicked element may be the tile itself or a child; find the nearest .tile
+    const clickedEl = event.target;
+    const tile = (clickedEl && clickedEl.closest) ? clickedEl.closest('.tile') : (clickedEl.classList && clickedEl.classList.contains('tile') ? clickedEl : null);
+
+     // click was not on a tile
+    if (!tile) return;
+    // click was on already correctly guessed strand
+    if (tile.classList.contains('correct') || tile.classList.contains('spangram')) {
+        return; 
+    }
+
+    // Tile id is in the form "x-y"
+    const key = tile.id || '';
+    const clicked_position = idToXY(key);
+
+    // case: no position selected yet
+    if (selected_positions.length == 0) {
+        selected_positions = [clicked_position];
+    }
+    else { // position selected
+
+    }
+
+    
+
+
+    // Example action: assign selection and log coordinates
+    tile.classList.add('selected');
+    console.log('Tile clicked at', clicked_position);
+}
+
+const idToXY = k => k.split('-').map(Number);
+const XYToid = ([x, y]) => `${x}-${y}`;
+
+function isAdjacentPosition(pos1, pos2){
+    const dx = Math.abs(pos1[0] - pos2[0]);
+    const dy = Math.abs(pos1[1] - pos2[1]);
+    // adjacent if max distance is exactly 1 (includes diagonals), not the same cell
+    return Math.max(dx, dy) === 1;
+}
+
+function deleteSelection(){
+    if (selected_positions.length == 0) {
+        return
+    }
+    // Remove 'selected' class from all currently selected tiles and clear the list
+    for (let i = 0; i < selected_positions.length; i++) {
+        const id = XYToid(selected_positions[i]);
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('selected');
+    }
+    selected_positions = [];
 }
 
 function check_strands_viability(strands_dict) {
@@ -93,12 +156,9 @@ function check_strands_viability(strands_dict) {
             seenCoords.add(coordKey);
 
             if (i > 0) {
-                const [prevX, prevY] = coords[i - 1];
-                const dx = Math.abs(prevX - x);
-                const dy = Math.abs(prevY - y);
-                const isAdjacent = Math.max(dx, dy) === 1;
+                const prev = coords[i - 1];
 
-                if (!isAdjacent) {
+                if (!isAdjacentPosition(prev,coords[i])) {
                     return false;
                 }
             }
