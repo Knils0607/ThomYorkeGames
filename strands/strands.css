@@ -38,10 +38,21 @@ hr {
     white-space: pre-wrap;
 }
 
+#wordcount {
+    font-size: 20px;
+    color: #111;
+    text-align: right;
+    margin: 0 auto;
+    width: 350px;
+    padding-right: 8px;
+}
+
 /* Reserve space for the input area so the layout doesn't shift */
 #input {
     min-height: 48px;
     padding: 6px;
+    font-size: 20px;
+    color: #111;
 }
 
 #board {
