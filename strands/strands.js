@@ -188,7 +188,7 @@ function setInputMessage(message) {
 function updateWordCount() {
     const wordCountEl = document.getElementById('wordcount');
     if (!wordCountEl) return;
-    wordCountEl.innerText = `${words_found} / ${num_words}`;
+    wordCountEl.innerText = `${words_found} / ${num_words} theme words found`;
 }
 
 function isStrand(){
