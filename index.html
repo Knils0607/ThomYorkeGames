@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thom Yorke Games</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #121212;
+        color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        text-align: center;
+        width: min(90vw, 600px);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      a {
+        display: inline-block;
+        text-decoration: none;
+        background: #2b6df6;
+        color: white;
+        padding: 14px 22px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      a:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Thom Yorke Games</h1>
+      <div class="buttons">
+        <a href="strands/strands.html">Play Strands</a>
+        <a href="wordle/wordle.html">Play Wordle</a>
+      </div>
+    </div>
+  </body>
+</html>
