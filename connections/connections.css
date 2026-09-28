@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+hr {
+    width: 50%;
+    margin: 20px auto;
+}
+
+#title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    gap: 5px;
+    width: max-content;
+    margin: 0 auto;
+    margin-top: 3px;
+}
+
+.tile {
+    width: 180px;
+    height: 60px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: beige;
+
+    /* Text */
+    color: black;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected {
+    background-color: rgb(112, 117, 121);
+    color: beige;
+}
+
